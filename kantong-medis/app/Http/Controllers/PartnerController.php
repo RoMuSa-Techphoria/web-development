@@ -70,7 +70,7 @@ class PartnerController extends Controller
      */
     public function edit(Partner $partner)
     {
-        //
+        return view('admin.pages.partner.update', ['partner' => $partner]);
     }
 
     /**
@@ -82,7 +82,6 @@ class PartnerController extends Controller
      */
     public function update(Request $request, Partner $partner)
     {
-        //
     }
 
     /**
