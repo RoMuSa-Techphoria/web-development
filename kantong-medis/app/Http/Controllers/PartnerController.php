@@ -25,7 +25,7 @@ class PartnerController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.partner.create');
     }
 
     /**
@@ -36,18 +36,30 @@ class PartnerController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $input = $request->validate([
+            'username' => ['required', 'unique:partners'],
+            'password' => ['required'],
+            'name' => ['required'],
+            'address' => ['required'],
+            'phone' => ['required', 'numeric'],
+            'map' => ['required'],
+            'image' => ['required', 'image', 'max:2048'],
+            'status' => ['required', 'in:active,inactive'],
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Partner  $partner
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Partner $partner)
-    {
-        //
+        $input['image'] = '';
+
+        $image = $request->image;
+        if ($image) {
+            $request->validate(['image' => ['image']]);
+            $destinationPath = 'images/partner';
+            $name = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $input['image'] = $image->storeAs($destinationPath, $name, 'public');
+        }
+
+        Partner::create($input);
+
+        return redirect()->route('partner.index');
     }
 
     /**
