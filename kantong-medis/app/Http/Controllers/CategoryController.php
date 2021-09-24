@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Models\Partner;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -16,7 +17,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('', ['category', $categories]);
+        return view('admin.pages.category.index', ['categories' => $categories]);
     }
 
     /**
@@ -26,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view();
+        return view('admin.pages.category.create');
     }
 
     /**
@@ -37,8 +38,8 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $category = Category::create($request->validated());
-        return redirect()->route();
+        Category::create($request->validated());
+        return redirect()->route('category.index');
     }
 
     /**
@@ -60,7 +61,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('', ['category', $category]);
+        return view('admin.pages.category.update', ['category' => $category]);
     }
 
     /**
@@ -73,7 +74,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
         $category->update($request->validated());
-        return redirect()->route('');
+        return redirect()->route('category.index');
     }
 
     /**
@@ -85,6 +86,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route();
+        return redirect()->route('category.index');
     }
 }

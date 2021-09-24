@@ -15,7 +15,7 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->enum('service_category', ['medicine','vaksin','covidtest']);
+            $table->enum('service_category', ['medicine','vaccine','covidtest']);
             $table->string('service_name');
             $table->timestamps();
         });
