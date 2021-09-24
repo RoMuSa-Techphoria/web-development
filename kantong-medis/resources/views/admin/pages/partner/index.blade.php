@@ -20,6 +20,7 @@
                             <th>Link Map</th>
                             <th>Gambar</th>
                             <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,11 +31,24 @@
                                 <td>{{ $row->name }}</td>
                                 <td>{{ $row->address }}</td>
                                 <td>{{ $row->phone }}</td>
-                                <td>{{ $row->map }}</td>
-                                <td>
-                                    <img src="{{ asset("storage/$row->image") }}" alt="error!" style="max-width: 200px;">
-                                </td>
+                                <td><a href="{{ $row->map }}" class="btn btn-primary"><i class="fa fa-map-marked"
+                                            style="margin-right: 8px"></i>Lihat Map</a></td>
+                                <td><a href="{{ asset("storage/$row->image") }}" class="btn btn-primary"><i
+                                            class="fa fa-image" style="margin-right: 8px"></i>Lihat Gambar</a></td>
                                 <td>{{ $row->status }}</td>
+                                <td>
+                                    <form action="{{ route('partner.destroy', $row->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="{{ route('partner.edit', $row->id) }}" class="btn btn-sm">
+                                            <i class="fas fa-edit text-info"></i>
+                                        </a>
+                                        <button class="btn btn-sm" type="submit"
+                                            onclick="return confirm('Apakah yakin ingin menghapus?')">
+                                            <i class="fas fa-trash text-danger"></i>
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

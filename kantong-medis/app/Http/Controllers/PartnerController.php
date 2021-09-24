@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Partner;
 use Illuminate\Http\Request;
+use App\Http\Requests\PartnerRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PartnerController extends Controller
 {
@@ -34,18 +36,9 @@ class PartnerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PartnerRequest $request)
     {
-        $input = $request->validate([
-            'username' => ['required', 'unique:partners'],
-            'password' => ['required'],
-            'name' => ['required'],
-            'address' => ['required'],
-            'phone' => ['required', 'numeric'],
-            'map' => ['required'],
-            'image' => ['required', 'image', 'max:2048'],
-            'status' => ['required', 'in:active,inactive'],
-        ]);
+        $input = $request->validated();
 
         $input['image'] = '';
 
@@ -80,8 +73,20 @@ class PartnerController extends Controller
      * @param  \App\Models\Partner  $partner
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Partner $partner)
+    public function update(PartnerRequest $request, Partner $partner)
     {
+        $input = $request->validated();
+
+        $image = $request->image;
+        if ($image) {
+            Storage::disk('public')->delete($partner->image);
+            $destinationPath = 'images/partner';
+            $name = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $input['image'] = $image->storeAs($destinationPath, $name, 'public');
+        }
+
+        $partner->update($input);
+        return redirect()->route('partner.index');
     }
 
     /**
@@ -92,6 +97,7 @@ class PartnerController extends Controller
      */
     public function destroy(Partner $partner)
     {
-        //
+        $partner->delete();
+        return redirect()->route('partner.index');
     }
 }
