@@ -11,7 +11,7 @@ class AuthController extends Controller
     {
         return view('admin.auth.login_admin');
     }
-    
+
     public function formPartner()
     {
         return view('admin.auth.login_partner');
@@ -24,10 +24,10 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+            return redirect()->intended('panel');
         }
 
         return back()->withErrors([
@@ -42,14 +42,26 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('partner')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+            return redirect()->intended('panel');
         }
 
         return back()->withErrors([
             'message' => 'The provided credentials do not match our records.',
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('partner')->logout();
+        Auth::guard('admin')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/panel');
     }
 }
