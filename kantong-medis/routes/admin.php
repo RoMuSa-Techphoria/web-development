@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('panel')->group(function () {
@@ -30,4 +31,5 @@ Route::prefix('panel')->group(function () {
 
     Route::resource('partner', PartnerController::class)->middleware('auth:admin');
     Route::resource('category', CategoryController::class)->middleware('auth:admin');
+    Route::resource('service', ServiceController::class)->middleware('auth:partner');
 });

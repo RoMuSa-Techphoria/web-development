@@ -13,29 +13,22 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Username</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>Telepon</th>
-                            <th>Link Map</th>
-                            <th>Gambar</th>
-                            <th>Status</th>
+                            <th>Name</th>
+                            <th>Stock</th>
+                            <th>Note</th>
+                            <th>Category</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($partners as $row)
+                        @foreach ($services as $row)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $row->username }}</td>
                                 <td>{{ $row->name }}</td>
-                                <td>{{ $row->address }}</td>
-                                <td>{{ $row->phone }}</td>
-                                <td><a href="{{ $row->map }}" class="btn btn-primary"><i class="fa fa-map-marked"
-                                            style="margin-right: 8px"></i>Lihat Map</a></td>
-                                <td><a href="{{ asset("storage/$row->image") }}" class="btn btn-primary"><i
-                                            class="fa fa-image" style="margin-right: 8px"></i>Lihat Gambar</a></td>
-                                <td>{{ $row->status }}</td>
+                                <td>{{ $row->stock }}</td>
+                                <td>{{ $row->note }}</td>
+                                <td>{{ $row->category->service_name }}</td>
+
                                 <td>
                                     <form action="{{ route('partner.destroy', $row->id) }}" method="POST">
                                         @csrf

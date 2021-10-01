@@ -4,29 +4,13 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Input Partner</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Input Service</h6>
         </div>
         <div class="card-body">
-            <form action="{{ route('partner.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('service.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="username"
-                        name="username" required>
-                </div>
-                @error('username')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
-                        name="password" required>
-                </div>
-                @error('password')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                <div class="form-group">
-                    <label for="name">Nama</label>
+                    <label for="name">Name</label>
                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
                         required>
                 </div>
@@ -34,44 +18,43 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
-                    <label for="address">Alamat</label>
-                    <input type="text" class="form-control @error('address') is-invalid @enderror" id="address"
-                        name="address" required>
-                </div>
-                @error('address')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                <div class="form-group">
-                    <label for="phone">Telepon</label>
-                    <input type="number" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone"
+                    <label for="stock">Stock</label>
+                    <input type="numeric" class="form-control @error('stock') is-invalid @enderror" id="stock" name="stock"
                         required>
                 </div>
-                @error('phone')
+                @error('stock')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
-                    <label for="map">Link Map</label>
-                    <input type="text" class="form-control @error('map') is-invalid @enderror" id="map" name="map" required>
+                    <label for="note">Note</label>
+                    <input type="text" class="form-control @error('note') is-invalid @enderror" id="note" name="note"
+                        required>
                 </div>
-                @error('map')
+                @error('note')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
+
+                <div class="form-group" hidden>
+                    <label for="partner_id">Partner</label>
+                    <input type="text" class="form-control @error('partner_id') is-invalid @enderror" id="partner_id"
+                        name="partner_id" value="{{ Auth::user()->id }}" required>
+                </div>
+                @error('note')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+
                 <div class="form-group">
-                    <label for="image">Gambar</label>
-                    <input type="file" class="form-control-file @error('image') is-invalid @enderror" id="image"
-                        name="image">
+                    <label for="category_id">Category</label>
+                    <select class="form-control" id="category_id" name="category_id">
+                        @foreach ($categories as $row)
+                            <option value="{{ $row->id }}">{{ $row->service_name }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                @error('image')
+                @error('category_id')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="status" id="inlineRadio1" value="active" checked>
-                    <label class="form-check-label" for="inlineRadio1">Aktif</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="status" id="inlineRadio2" value="inactive">
-                    <label class="form-check-label" for="inlineRadio2">Tidak Aktif</label>
-                </div>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

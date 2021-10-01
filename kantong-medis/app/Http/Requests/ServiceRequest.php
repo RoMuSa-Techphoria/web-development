@@ -27,8 +27,8 @@ class ServiceRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'stock' => ['required', 'numeric'],
             'note' => ['string'],
-            'partner_id' => ['required', 'exists:partner,id'],
-            'category_id' => ['required', 'exists:category,id']
+            'partner_id' => ['required', 'exists:partners,id'],
+            'category_id' => ['required', 'exists:categories,id']
         ];
     }
 }
