@@ -18,16 +18,16 @@
                     </select>
                 </div>
                 @error('service_category')
-                <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 
                 <div class="form-group">
                     <label for="service_name">Nama Service</label>
-                    <input type="text" class="form-control @error('service_name') is-invalid @enderror" id="service_name" name="service_name"
-                           required>
+                    <input type="text" class="form-control @error('service_name') is-invalid @enderror" id="service_name"
+                        name="service_name" required>
                 </div>
                 @error('service_name')
-                <div class="alert alert-danger">{{ $message }}</div>
+                    <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 
                 <button type="submit" class="btn btn-primary">Submit</button>

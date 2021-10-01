@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ServiceRequest;
 use App\Models\Category;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Service::where('partner_id', Auth::user()->id)->get();
+
         return view('admin.pages.service.index', ['services' => $services]);
     }
 
@@ -27,8 +29,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $categories = Category::orderBy('name', 'ASC')->get();
-        return view('admin.pages.service.create',['categories' => $categories]);
+        $categories = Category::orderBy('service_name', 'ASC')->get();
+        return view('admin.pages.service.create', ['categories' => $categories]);
     }
 
     /**
@@ -37,9 +39,10 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ServiceRequest $request)
     {
-        //
+        Service::create($request->validated());
+        return redirect()->route('service.index');
     }
 
     /**
