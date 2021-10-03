@@ -47,7 +47,7 @@ class PartnerController extends Controller
             $request->validate(['image' => ['image']]);
             $destinationPath = 'images/partner';
             $name = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $input['image'] = $image->storeAs($destinationPath, $name, 'public');
+            $input['image'] = $image->storeAs($destinationPath, $name, 'custom');
         }
 
         Partner::create($input);
@@ -79,10 +79,10 @@ class PartnerController extends Controller
 
         $image = $request->image;
         if ($image) {
-            Storage::disk('public')->delete($partner->image);
+            Storage::disk('custom')->delete($partner->image);
             $destinationPath = 'images/partner';
             $name = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $input['image'] = $image->storeAs($destinationPath, $name, 'public');
+            $input['image'] = $image->storeAs($destinationPath, $name, 'custom');
         }
 
         $partner->update($input);
