@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                             <div class="card-footer text-muted bg-white">
-                                2 days ago
+                                {{ $row->updated_at->diffForHumans() }}
                             </div>
                         </div>
                     </div>
