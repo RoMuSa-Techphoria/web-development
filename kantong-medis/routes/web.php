@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Explore\Index;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 require __DIR__ . '/admin.php';
+
 Route::get('/', function () {
     return view('dashboard');
 });
+
+Route::get('/explore', Index::class)->name('explore.index');
