@@ -15,4 +15,9 @@ class Service extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class);
+    }
 }
