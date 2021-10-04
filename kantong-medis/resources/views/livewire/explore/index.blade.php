@@ -117,11 +117,12 @@
                                             <br>
                                             <i class="bi bi-phone text-secondary"></i> {{ $row->partner->phone }}
                                         </p>
-                                        <p class="card-text text-danger fs-6 fst-italic">{{ $row->note }}}</p>
+                                        <p class="card-text text-danger fs-6 fst-italic">*{{ $row->note }}</p>
                                         <a href="{{ $row->partner->map }}" class="btn btn-outline-danger">
                                             <i class="bi bi-map"></i> Map
                                         </a>
-                                        <a href="#" class="btn btn-outline-success">
+                                        <a href=" https://wa.me/{{ $row->partner->phone }}"
+                                            class="btn btn-outline-success">
                                             <i class="bi bi-whatsapp"></i> Whatsapp
                                         </a>
                                     </div>
