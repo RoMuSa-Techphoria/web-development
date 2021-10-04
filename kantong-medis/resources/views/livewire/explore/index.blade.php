@@ -1,7 +1,7 @@
 <div class="container py-4">
     <div class="row mb-4">
         <div class="col">
-            <input class="form-control" type="search" placeholder="Search">
+            <input wire:model="search" class="form-control" type="search" placeholder="Search">
         </div>
     </div>
     <div class="row">
@@ -10,21 +10,21 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" style="font-weight: 600;">Filter Pencarian Anda</li>
                     <li class="list-group-item">
-                        <div class="mb-2">Kategori</div>
+                        {{-- <div class="mb-2">Kategori</div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="medicine">
+                            <input class="form-check-input" type="checkbox" value="medicine" id="medicine">
                             <label class="form-check-label" for="medicine">
                                 Obat-obatan
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="vaccine">
+                            <input class="form-check-input" type="checkbox" value="vaccine" id="vaccine">
                             <label class="form-check-label" for="vaccine">
                                 Vaksin
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="test">
+                            <input class="form-check-input" type="checkbox" value="covidtest" id="test">
                             <label class="form-check-label" for="test">
                                 Covid-19 Test
                             </label>
@@ -36,54 +36,15 @@
                             <label class="form-check-label" for="azithromycin">
                                 Azithromycin
                             </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="favipiravir">
-                            <label class="form-check-label" for="favipiravir">
-                                Favipiravir
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="immunoglobulin">
-                            <label class="form-check-label" for="immunoglobulin">
-                                Immunoglobulin
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="ivermectin">
-                            <label class="form-check-label" for="ivermectin">
-                                Ivermectin
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="multivitamin">
-                            <label class="form-check-label" for="multivitamin">
-                                Multivitamin
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="oseltamivir">
-                            <label class="form-check-label" for="oseltamivir">
-                                Oseltamivir
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="remdesivir">
-                            <label class="form-check-label" for="remdesivir">
-                                Remdesivir
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="tocilizumab">
-                            <label class="form-check-label" for="tocilizumab">
-                                Tocilizumab
-                            </label>
-                        </div>
-                        <hr style="margin: 10px 0; color: #9e9e9e;">
+                        </div> --}}
+
+                        {{-- <hr style="margin: 10px 0; color: #9e9e9e;"> --}}
                         <div class="mb-2">Partner Kami</div>
-                        <select class="form-select mb-2">
-                            <option selected>K-24</option>
-                            <option>Kimia Farma</option>
+                        <select wire:model="partner" class="form-select mb-2">
+                            <option value="">Select</option>
+                            @foreach ($partners as $row)
+                                <option value="{{ $row->id }}">{{ $row->name }}</option>
+                            @endforeach
                         </select>
                     </li>
                 </ul>
