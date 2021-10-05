@@ -30,10 +30,10 @@
                                 <td>{{ $row->category->service_name }}</td>
 
                                 <td>
-                                    <form action="{{ route('partner.destroy', $row->id) }}" method="POST">
+                                    <form action="{{ route('service.destroy', $row->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <a href="{{ route('partner.edit', $row->id) }}" class="btn btn-sm">
+                                        <a href="{{ route('service.edit', $row->id) }}" class="btn btn-sm">
                                             <i class="fas fa-edit text-info"></i>
                                         </a>
                                         <button class="btn btn-sm" type="submit"

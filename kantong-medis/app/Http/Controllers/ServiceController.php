@@ -64,7 +64,8 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        $categories = Category::all();
+        return view('admin.pages.service.update', ['service' => $service, 'categories' => $categories]);
     }
 
     /**
@@ -74,9 +75,10 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(ServiceRequest $request, Service $service)
     {
-        //
+        $service->update($request->validated());
+        return redirect()->route('service.index');
     }
 
     /**
@@ -87,6 +89,7 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
+        return redirect()->route('service.index');
     }
 }

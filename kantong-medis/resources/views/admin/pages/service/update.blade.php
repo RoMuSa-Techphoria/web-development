@@ -4,74 +4,59 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Input Partner</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Edit Service</h6>
         </div>
         <div class="card-body">
-            <form action="{{ route('partner.update', $partner->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('service.update', $service->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="username"
-                        name="username" value="{{ $partner->username }}" required>
-                </div>
-                @error('username')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-
-                <div class="form-group">
-                    <label for="name">Nama</label>
+                    <label for="name">Name</label>
                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-                        value="{{ $partner->name }}" required>
+                        value="{{ $service->name }}" required>
                 </div>
                 @error('name')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
+
                 <div class="form-group">
-                    <label for="address">Alamat</label>
-                    <input type="text" class="form-control @error('address') is-invalid @enderror" id="address"
-                        name="address" value="{{ $partner->address }}" required>
+                    <label for="stock">Stock</label>
+                    <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" name="stock"
+                        value="{{ $service->stock }}" required>
                 </div>
-                @error('address')
+                @error('stock')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
                 <div class="form-group">
-                    <label for="phone">Telepon</label>
-                    <input type="number" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone"
-                        value="{{ $partner->phone }}" required>
+                    <label for="note">Note</label>
+                    <input type="text" class="form-control @error('note') is-invalid @enderror" id="note" name="note"
+                        value="{{ $service->note }}" required>
                 </div>
-                @error('phone')
+                @error('note')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
+
+                <div class="form-group" hidden>
+                    <label for="partner_id">Partner</label>
+                    <input type="text" class="form-control @error('partner_id') is-invalid @enderror" id="partner_id"
+                        name="partner_id" value="{{ Auth::user()->id }}" required>
+                </div>
+                @error('partner_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+
                 <div class="form-group">
-                    <label for="map">Link Map</label>
-                    <input type="text" class="form-control @error('map') is-invalid @enderror" id="map" name="map"
-                        value="{{ $partner->map }}" required>
+                    <label for="category_id">Category</label>
+                    <select class="form-control" id="category_id" name="category_id">
+                        @foreach ($categories as $row)
+                            <option value="{{ $row->id }}">{{ $row->service_name }}</option>
+                        @endforeach
+                    </select>
                 </div>
-                @error('map')
+                @error('category_id')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <div class="form-group">
-                    <label for="image">Gambar</label>
-                    <input type="file" class="form-control-file @error('image') is-invalid @enderror" id="image"
-                        name="image">
-                </div>
-                @error('image')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="status" id="inlineRadio1" value="active" @if ($partner->status == 'active')
-                    checked
-                    @endif>
-                    <label class="form-check-label" for="inlineRadio1">Aktif</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="status" id="inlineRadio2" value="inactive"
-                        @if ($partner->status == 'inactive')
-                    checked
-                    @endif>
-                    <label class="form-check-label" for="inlineRadio2">Tidak Aktif</label><br>
-                </div>
+
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
